@@ -97,7 +97,6 @@ services:
   - type: web
     name: breathe-frontend
     runtime: static
-    plan: free
     rootDir: frontend
     buildCommand: npm ci && npm run build
     staticPublishPath: ./dist
