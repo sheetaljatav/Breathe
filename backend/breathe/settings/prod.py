@@ -12,6 +12,8 @@ DEBUG = False
 # These three are required at boot in prod. Fail fast if absent.
 SECRET_KEY = env("DJANGO_SECRET_KEY", required=True)
 ALLOWED_HOSTS = [h.strip() for h in env("DJANGO_ALLOWED_HOSTS", required=True).split(",") if h.strip()]
+if ".onrender.com" not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(".onrender.com")
 
 # Security headers
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
@@ -29,6 +31,12 @@ SECURE_HSTS_PRELOAD = False               # don't preload until we're sure
 SECURE_REFERRER_POLICY = "same-origin"
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = "DENY"
+
+# Render assigns a short suffix to service hostnames when a plain name is
+# unavailable, so the Blueprint cannot know the final frontend origin ahead of
+# time. Keep the explicit env allowlist above, and also allow Render subdomains.
+CORS_ALLOWED_ORIGIN_REGEXES = [r"^https://.*\.onrender\.com$"]
+CSRF_TRUSTED_ORIGINS = [*CSRF_TRUSTED_ORIGINS, "https://*.onrender.com"]
 
 # Sentry
 _dsn = env("SENTRY_DSN", default="")
