@@ -1,5 +1,5 @@
 import { type FormEvent, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { ApiError } from "@/api/client";
 import {
@@ -14,7 +14,6 @@ import { fmtDate, fmtNumber, fmtRelative } from "@/lib/format";
 
 export function QueueDetail() {
   const { id } = useParams<{ id: string }>();
-  const nav = useNavigate();
   const q = useActivity(id ? Number(id) : null);
 
   if (q.isLoading) return <div className="p-6"><Spinner /></div>;

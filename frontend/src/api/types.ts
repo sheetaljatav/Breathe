@@ -1,4 +1,4 @@
-/** Backend response types. Keep in sync with backend/*/serializers.py. */
+/** Backend response types. Keep in sync with backend serializer modules. */
 
 export interface OrganizationDTO {
   id: number;
