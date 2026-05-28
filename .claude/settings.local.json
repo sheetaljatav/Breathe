@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\sheet\\\\Downloads\\\\Breathe\\\\frontend\\\\src\" -Recurse -Directory)",
+      "Bash(Select-Object FullName)"
+    ]
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "metadata": {
+    "report_id": "RPT-2026-Q1-001",
+    "currency": "USD",
+    "generated_at": "2026-04-01T00:00:00Z",
+    "schema_version": "v4"
+  },
+  "trips": [
+    {
+      "trip_id": "T-2026-001",
+      "employee_id": "E-1001",
+      "employee_name": "Alex Johnson",
+      "start_date": "2026-01-14",
+      "end_date": "2026-01-17",
+      "purpose": "Client onsite - Acme Chicago",
+      "segments": [
+        {
+          "type": "AIR",
+          "vendor": "United Airlines",
+          "vendor_code": "UA",
+          "origin_iata": "SFO",
+          "destination_iata": "ORD",
+          "departure_at": "2026-01-14T07:30:00Z",
+          "distance_km": 2964,
+          "cabin_class": "ECONOMY",
+          "amount": 425.00,
+          "currency": "USD"
+        },
+        {
+          "type": "LODGING",
+          "vendor": "Marriott",
+          "property_id": "MAR-ORD-DT-001",
+          "nights": 3,
+          "checkin_date": "2026-01-14",
+          "amount": 1050.00,
+          "currency": "USD"
+        },
+        {
+          "type": "CAR",
+          "vendor": "Uber",
+          "category": "RIDESHARE",
+          "distance_km": 28,
+          "trip_at": "2026-01-14T19:15:00Z",
+          "amount": 42.00,
+          "currency": "USD"
+        },
+        {
+          "type": "CAR",
+          "vendor": "Uber",
+          "category": "RIDESHARE",
+          "distance_km": 31,
+          "trip_at": "2026-01-17T08:30:00Z",
+          "amount": 48.50,
+          "currency": "USD"
+        },
+        {
+          "type": "AIR",
+          "vendor": "United Airlines",
+          "vendor_code": "UA",
+          "origin_iata": "ORD",
+          "destination_iata": "SFO",
+          "departure_at": "2026-01-17T16:00:00Z",
+          "distance_km": null,
+          "cabin_class": "ECONOMY",
+          "amount": 425.00,
+          "currency": "USD"
+        }
+      ]
+    },
+    {
+      "trip_id": "T-2026-002",
+      "employee_id": "E-1042",
+      "employee_name": "Priya Patel",
+      "start_date": "2026-02-20",
+      "end_date": "2026-02-22",
+      "purpose": "Sustainability Reporting Conference - London",
+      "segments": [
+        {
+          "type": "AIR",
+          "vendor": "Delta",
+          "vendor_code": "DL",
+          "origin_iata": "JFK",
+          "destination_iata": "LHR",
+          "departure_at": "2026-02-20T18:30:00Z",
+          "distance_km": null,
+          "cabin_class": "BUSINESS",
+          "amount": 4200.00,
+          "currency": "USD"
+        },
+        {
+          "type": "LODGING",
+          "vendor": "Hilton",
+          "property_id": "HIL-LHR-PADD-002",
+          "nights": 2,
+          "checkin_date": "2026-02-20",
+          "amount": 580.00,
+          "currency": "GBP"
+        },
+        {
+          "type": "AIR",
+          "vendor": "British Airways",
+          "vendor_code": "BA",
+          "origin_iata": "LHR",
+          "destination_iata": "XYZ",
+          "departure_at": "2026-02-22T11:00:00Z",
+          "distance_km": null,
+          "cabin_class": "ECONOMY",
+          "amount": 350.00,
+          "currency": "GBP"
+        }
+      ]
+    },
+    {
+      "trip_id": "T-2026-003",
+      "employee_id": "E-1108",
+      "employee_name": "Marcus Weber",
+      "start_date": "2026-03-08",
+      "end_date": "2026-03-10",
+      "purpose": "Stuttgart plant audit",
+      "segments": [
+        {
+          "type": "AIR",
+          "vendor": "Lufthansa",
+          "vendor_code": "LH",
+          "origin_iata": "FRA",
+          "destination_iata": "MUC",
+          "departure_at": "2026-03-08T09:00:00Z",
+          "distance_km": null,
+          "cabin_class": "ECONOMY",
+          "amount": 220.00,
+          "currency": "EUR"
+        },
+        {
+          "type": "LODGING",
+          "vendor": "Steigenberger",
+          "property_id": "STG-MUC-CENTRAL",
+          "nights": 2,
+          "checkin_date": "2026-03-08",
+          "amount": 340.00,
+          "currency": "EUR"
+        },
+        {
+          "type": "CAR",
+          "vendor": "Sixt",
+          "category": "RENTAL_COMPACT",
+          "distance_km": 215,
+          "trip_at": "2026-03-08T14:00:00Z",
+          "amount": 145.00,
+          "currency": "EUR"
+        },
+        {
+          "type": "AIR",
+          "vendor": "Lufthansa",
+          "vendor_code": "LH",
+          "origin_iata": "MUC",
+          "destination_iata": "FRA",
+          "departure_at": "2026-03-10T18:00:00Z",
+          "distance_km": null,
+          "cabin_class": "ECONOMY",
+          "amount": 220.00,
+          "currency": "EUR"
+        }
+      ]
+    }
+  ]
+}

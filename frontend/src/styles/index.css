@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base resets beyond Tailwind preflight. */
+@layer base {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";   /* Inter tabular vibes */
+  }
+
+  /* Use tabular numerals for table cells holding numbers/dates/IDs */
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+
+  ::selection {
+    background: #e0e7ff;
+  }
+}
+
+@layer components {
+  /* Pill button */
+  .btn {
+    @apply inline-flex items-center gap-1.5 h-8 px-3 text-sm font-medium
+           border border-surface-border bg-white text-ink
+           hover:bg-surface-muted active:bg-surface-border rounded
+           transition-colors disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-primary {
+    @apply btn bg-ink text-ink-inverse border-ink hover:bg-ink/90 active:bg-ink/80;
+  }
+  .btn-danger {
+    @apply btn text-white bg-status-rejected border-status-rejected hover:bg-status-rejected/90;
+  }
+  .btn-ghost {
+    @apply btn bg-transparent border-transparent hover:bg-surface-muted;
+  }
+
+  /* Input */
+  .input {
+    @apply h-8 px-2 text-sm border border-surface-border rounded bg-white
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20
+           placeholder:text-ink-subtle;
+  }
+
+  /* Table cell shorthands */
+  .td {
+    @apply px-3 py-2 text-sm align-middle;
+  }
+  .th {
+    @apply px-3 py-2 text-xs font-medium uppercase tracking-wider text-ink-subtle text-left;
+  }
+
+  /* Status chip */
+  .chip {
+    @apply inline-flex items-center gap-1 px-1.5 h-5 text-xs font-medium uppercase tracking-wider rounded;
+  }
+  .chip-pending   { @apply chip bg-neutral-100 text-neutral-700; }
+  .chip-flagged   { @apply chip bg-amber-50 text-amber-800; }
+  .chip-approved  { @apply chip bg-green-50 text-green-800; }
+  .chip-rejected  { @apply chip bg-red-50 text-red-800; }
+  .chip-locked    { @apply chip bg-blue-50 text-blue-800; }
+}
