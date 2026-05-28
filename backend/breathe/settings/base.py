@@ -154,6 +154,7 @@ CELERY_TASK_REJECT_ON_WORKER_LOST = True
 CELERY_TASK_TIME_LIMIT = 600          # hard 10-min cap; parsers should finish well under
 CELERY_TASK_SOFT_TIME_LIMIT = 540
 CELERY_WORKER_PREFETCH_MULTIPLIER = 1  # one task at a time per worker, fairer scheduling
+CELERY_TASK_ALWAYS_EAGER = env("CELERY_TASK_ALWAYS_EAGER", default="false").lower() == "true"
 
 # Sessions: keep server-side; lighter cookie payload + supports invalidation.
 SESSION_ENGINE = "django.contrib.sessions.backends.db"

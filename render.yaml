@@ -1,4 +1,4 @@
-# Render Blueprint: provisions backend (web + worker), frontend (static), Postgres, and Redis.
+# Render Blueprint: provisions backend, frontend, Postgres, and Redis.
 # Docs: https://render.com/docs/blueprint-spec
 #
 # After first deploy, set in the Render dashboard:
@@ -33,7 +33,8 @@ services:
     buildCommand: |
       pip install -r requirements.txt &&
       python manage.py collectstatic --noinput &&
-      python manage.py migrate --noinput
+      python manage.py migrate --noinput &&
+      python manage.py seed_demo
     startCommand: gunicorn breathe.wsgi:application --workers 2 --bind 0.0.0.0:$PORT
     healthCheckPath: /healthz
     envVars:
@@ -58,38 +59,8 @@ services:
           name: breathe-redis
           type: redis
           property: connectionString
-      - key: PYTHON_VERSION
-        value: "3.13.2"
-
-  - type: worker
-    name: breathe-worker
-    runtime: python
-    plan: free
-    rootDir: backend
-    buildCommand: pip install -r requirements.txt
-    startCommand: celery -A breathe worker --loglevel=info --concurrency=2
-    envVars:
-      - key: DJANGO_SETTINGS_MODULE
-        value: breathe.settings.prod
-      - key: DJANGO_SECRET_KEY
-        fromService:
-          type: web
-          name: breathe-web
-          envVarKey: DJANGO_SECRET_KEY
-      - key: DATABASE_URL
-        fromDatabase:
-          name: breathe-postgres
-          property: connectionString
-      - key: REDIS_URL
-        fromService:
-          name: breathe-redis
-          type: redis
-          property: connectionString
-      - key: SENTRY_DSN
-        fromService:
-          type: web
-          name: breathe-web
-          envVarKey: SENTRY_DSN
+      - key: CELERY_TASK_ALWAYS_EAGER
+        value: "true"
       - key: PYTHON_VERSION
         value: "3.13.2"
 
