@@ -135,14 +135,6 @@ class Command(BaseCommand):
 
     @transaction.atomic
     def handle(self, *args, **opts) -> None:
-        # Seeding writes Memberships + PlantCodes across multiple orgs without
-        # a request context (so the RLS GUC isn't set per-org). FORCE RLS on
-        # those tables would block every INSERT. We disable row-security for
-        # the duration of this transaction. SET LOCAL is auto-rolled-back at
-        # commit; it does not leak to other sessions or other transactions.
-        with connection.cursor() as cur:
-            cur.execute("SET LOCAL row_security = off")
-
         units = {}
         for code, label, dimension in UNITS:
             u, _ = CanonicalUnit.objects.get_or_create(
@@ -185,6 +177,7 @@ class Command(BaseCommand):
         self.stdout.write(f"orgs: {len(orgs)}")
 
         for slug, plants in PLANTS.items():
+            _set_rls_org(orgs[slug].id)
             for code, name, country in plants:
                 PlantCode.objects.get_or_create(
                     organization=orgs[slug], code=code,
@@ -193,6 +186,7 @@ class Command(BaseCommand):
 
         User = get_user_model()
         for slug, email, password, role in DEMO_USERS:
+            _set_rls_org(orgs[slug].id)
             u, created = User.objects.get_or_create(
                 username=email,
                 defaults={"email": email, "first_name": email.split("@")[0].title()},
@@ -203,5 +197,16 @@ class Command(BaseCommand):
             Membership.objects.get_or_create(
                 organization=orgs[slug], user=u, defaults={"role": role}
             )
+        _clear_rls_org()
 
         self.stdout.write(self.style.SUCCESS("seed_demo complete."))
+
+
+def _set_rls_org(org_id: int) -> None:
+    with connection.cursor() as cur:
+        cur.execute("SELECT set_config(%s, %s, false)", ["app.current_org_id", str(org_id)])
+
+
+def _clear_rls_org() -> None:
+    with connection.cursor() as cur:
+        cur.execute("SELECT set_config(%s, '', false)", ["app.current_org_id"])
